@@ -2,7 +2,7 @@ import User from '../models/user-model.js'
 import bcrypt from 'bcryptjs'
 import {createAccessToken} from '../libs/jwt.js'
 import jwt from 'jsonwebtoken'
-import { TOKEN_SECRET } from '../config.js'
+
 
 //registrar
 export const register = async(req, res) => {
@@ -77,6 +77,9 @@ export const profile = async (req,res) =>{
 }
 
 export const verifyToken = async (req,res) =>{
+
+    const TOKEN_SECRET = process.env.TOKEN_SECRET
+
     const {token} = req.cookies
 
     if(!token) return res.status(401).json({message:"Token no encontrado"})
