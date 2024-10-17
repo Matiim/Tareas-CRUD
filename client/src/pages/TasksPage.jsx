@@ -11,7 +11,7 @@ function TasksPage() {
     getTasks()
   }, [])
 
-  if (tasks.length === 0) return <div>No hay tareas</div>
+  if (tasks.length === 0) return <div className="text-center font-bold">No hay tareas aun</div>
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
