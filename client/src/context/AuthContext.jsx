@@ -20,34 +20,33 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (user) => {
     try {
-      const response = await registerRequest(user);
-      setUser(response.data);
-      setIsAuthenticated(true);
+      const res = await registerRequest(user);
+      if (res.status === 200) {
+        setUser(res.data);
+        setIsAuthenticated(true);
+      }
     } catch (error) {
-      console.log(error.response);
-      setErrors(error.response.data);
+      console.log(error.response.data);
+      setErrors(error.response.data.message);
     }
   };
 
   const signIn = async (user) => {
     try {
-      const response = await loginRequest(user);
-      setUser(response.data);
+      const res = await loginRequest(user);
+      setUser(res.data);
       setIsAuthenticated(true);
-      console.log(response);
     } catch (error) {
-      if (Array.isArray(error.response.data)) {
-        return setErrors(error.response.data);
-      }
-      setErrors([error.response.data.message]);
+      console.log(error);
+      // setErrors(error.response.data.message);
     }
   };
 
-  const logout = async () => {
+  const logout = () => {
     Cookies.remove("token");
-    setIsAuthenticated(false);
     setUser(null);
-  }
+    setIsAuthenticated(false);
+  };
 
   // limpiar los errores despues de 5 segundos
   useEffect(() => {
@@ -60,38 +59,30 @@ export const AuthProvider = ({ children }) => {
     }
   }, [errors]);
 
-
-
   // verificar si el token es valido
   useEffect(() => {
-    async function checkToken() {
+    const checkLogin = async () => {
       const cookies = Cookies.get();
-
       if (!cookies.token) {
         setIsAuthenticated(false);
         setLoading(false);
-        return setUser(null);
+        return;
       }
-      
+
       try {
-        const res = await verifyToken(cookies.token);
-        if (!res.data) {
-          setIsAuthenticated(false);
-          setLoading(false);
-          return;
-        }
+        const res = await verifyTokenRequest(cookies.token);
+        console.log(res);
+        if (!res.data) return setIsAuthenticated(false);
         setIsAuthenticated(true);
         setUser(res.data);
         setLoading(false);
       } catch (error) {
         setIsAuthenticated(false);
-        setUser(null);
         setLoading(false);
       }
-    }
-    checkToken();
+    };
+    checkLogin();
   }, []);
-
   return (
     <AuthContext.Provider
       value={{
