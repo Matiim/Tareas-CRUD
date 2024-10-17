@@ -49,6 +49,7 @@ function TaskFormPage() {
         <form onSubmit={onSubmit}>
           <label htmlFor="title">Titulo</label>
           <input
+            id="title"
             type="text"
             placeholder="Titulo"
             {...register("title")}
@@ -57,6 +58,7 @@ function TaskFormPage() {
           />
           <label htmlFor="description">Descripción</label>
           <textarea
+          id="description"
             rows="3"
             placeholder="Descripción"
             {...register("description")}
@@ -64,6 +66,7 @@ function TaskFormPage() {
           ></textarea>
           <label htmlFor="date">Fecha</label>
           <input
+          id="date"
             type="date"
             placeholder="Fecha"
             {...register("date")}
