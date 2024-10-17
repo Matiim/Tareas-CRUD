@@ -54,9 +54,9 @@ export function TaskProvider({ children }) {
         }
     }
 
-    const updateTask = async (id,tasks) => {
+    const updateTask = async (id,task) => {
         try {
-           await updateTasksRequest(id,tasks)
+           await updateTasksRequest(id,task)
         } catch (error) {
           console.log(error);
         }
