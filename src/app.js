@@ -25,7 +25,7 @@ app.use("/api",authRoutes)
 app.use("/api",tasksRouter)
 
 app.use((req, res, next) => {
-    res.sendFile(path.resolve(__dirname, 'src', 'index.html'));  // Ajusta la ruta al archivo index.html en 'src'
+    res.sendFile(path.resolve(__dirname, 'index.html'));  // Ajusta la ruta al archivo index.html en 'src'
   });
 
 
