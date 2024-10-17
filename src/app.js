@@ -12,7 +12,7 @@ const app = express()
 
 app.use(cors({
     origin: 'https://tareas-crud-delta.vercel.app',
-    credentials: true
+    credentials: true 
 }))
 app.use(morgan('dev'))
 //es para que express pueda leer json
