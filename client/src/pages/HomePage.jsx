@@ -1,7 +1,7 @@
 import { useAuth } from "../context/AuthContext"
 
 function HomePage() {
-  const user = useAuth()
+  const {user} = useAuth()
 
 
   return (

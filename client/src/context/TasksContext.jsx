@@ -27,10 +27,13 @@ export function TaskProvider({ children }) {
     
     // crear tarea
     const createTask = async (task) => {
-        const res = await createTasksRequest(task);
-        console.log(res);
-        
-    }
+      try {
+          const res = await createTasksRequest(task);
+          console.log('Tarea creada:', res.data);
+      } catch (error) {
+          console.error('Error al crear la tarea:', error.response?.data || error.message);
+      }
+  };
   
     // borrar tarea
     const deleteTask = async (id) => {  
