@@ -18,6 +18,17 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+    // limpiar los errores despues de 5 segundos
+    useEffect(() => {
+      if (errors.length > 0) {
+        const timer = setTimeout(() => {
+          setErrors([]);
+        }, 5000);
+        return () => clearTimeout(timer);
+      }
+    }, [errors]);
+
   const signUp = async (user) => {
     try {
       const res = await registerRequest(user);
@@ -48,16 +59,6 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
-  // limpiar los errores despues de 5 segundos
-  useEffect(() => {
-    if (errors.length > 0) {
-      const timer = setTimeout(() => {
-        setErrors([]);
-      }, 5000);
-      // limpiar el timer cuando el componente se desmonte
-      return () => clearTimeout(timer);
-    }
-  }, [errors]);
 
   // verificar si el token es valido
   useEffect(() => {
@@ -70,7 +71,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        const res = await verifyTokenRequest(cookies.token);
+        const res = await verifyToken(cookies.token);
         console.log(res);
         if (!res.data) return setIsAuthenticated(false);
         setIsAuthenticated(true);
