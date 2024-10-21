@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { AuthProvider } from "../context/AuthContext";
 
 function Navbar() {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, logout, user } = AuthProvider();
 
   return (
     <nav className="flex justify-between items-center p-6 bg-zinc-700 text-white">
