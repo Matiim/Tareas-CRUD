@@ -28,9 +28,9 @@ function Navbar() {
                 Nueva Tarea
               </Link>
             </li>
-            <p className="text-white  font-bold text-xl text-center">
+            {/* <p className="text-white  font-bold text-xl text-center">
               Hola, {user.username}
-            </p>
+            </p> */}
             {/*   <li>
               <Link to="/profile"className="text-white  hover:text-blue-500 font-bold">Perfil</Link>
             </li> */}
