@@ -19,8 +19,7 @@ export function TaskProvider({ children }) {
     const getTasks = async () => { 
       try {
           const res = await getTasksRequest();
-          console.log('Tareas obtenidas:', res.data); // Verifica la estructura de los datos
-          setTasks(res.data); // Actualiza el estado con todas las tareas
+          setTasks(res.data);
       } catch (error) {
           console.log('Error al obtener las tareas:', error);
       };   
@@ -30,10 +29,10 @@ export function TaskProvider({ children }) {
     // crear tarea
     const createTask = async (task) => {
       try {
-          const res = await createTasksRequest(task);
-          console.log('Tarea creada:', res.data);
+          const res = await createTasksRequest(task); // Crear la tarea en el backend
+          setTasks((prevTasks) => [...prevTasks, res.data]); // Añadir la nueva tarea al estado actual
       } catch (error) {
-          console.error('Error al crear la tarea:', error.response?.data || error.message);
+          console.error('Error al crear la tarea:', error);
       }
   };
   
