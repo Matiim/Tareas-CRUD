@@ -58,13 +58,17 @@ export function TaskProvider({ children }) {
         }
     }
 
-    const updateTask = async (id,task) => {
-        try {
-           await updateTasksRequest(id,task)
-        } catch (error) {
-          console.log(error);
-        }
-    }
+    const updateTask = async (taskId, updatedTask) => {
+      try {
+          const res = await updateTasksRequest(taskId, updatedTask); // Actualizar la tarea en el backend
+          
+          setTasks((prevTasks) => prevTasks.map((task) =>
+              task._id === taskId ? res.data : task // Reemplaza la tarea con los datos actualizados
+          ));
+      } catch (error) {
+          console.error('Error al actualizar la tarea:', error);
+      }
+  };
 
 
 
