@@ -16,14 +16,16 @@ export function TaskProvider({ children }) {
     const [tasks, setTasks] = useState([]);
 
     // obtener tareas
-    const getTasks = async () => {
-        try {
-            const res = await getTasksRequest();
-            setTasks(res.data);
-        } catch (error) {
-            console.log(error);
-        };   
-    }
+    const getTasks = async () => { 
+      try {
+          const res = await getTasksRequest();
+          console.log('Tareas obtenidas:', res.data); // Verifica la estructura de los datos
+          setTasks(res.data); // Actualiza el estado con todas las tareas
+      } catch (error) {
+          console.log('Error al obtener las tareas:', error);
+      };   
+  };
+  
     
     // crear tarea
     const createTask = async (task) => {
